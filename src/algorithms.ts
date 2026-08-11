@@ -64,9 +64,14 @@ export function* runDFS() {
     // START POSITION
     let startCell: Cell | null = null;
     let endCell: Cell | null = null;
+
+    searchStart:
     for (const row of grid)
         for (const cell of row)
-            if (cell.state == CellState.Start) startCell = cell;
+            if (cell.state == CellState.Start) {
+                startCell = cell;
+                break searchStart;
+            } 
     if (startCell == null) {
         console.log("No start Pos");
         return;
