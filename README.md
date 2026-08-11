@@ -40,9 +40,3 @@ cd pathfinding-visualiser
 npm install
 npm run dev
 ```
-
-## Notes
-
-The grid is stored as [a flat array / 2D array] and the search runs
-step-by-step through a [queue / priority queue], with each step pushed to an
-animation buffer so the rendering stays decoupled from the algorithm itself.
