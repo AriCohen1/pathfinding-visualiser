@@ -26,7 +26,6 @@ once the target is reached.
 - Click-and-drag wall drawing, draggable start and target nodes
 - Weighted terrain with configurable cost
 - Adjustable animation speed
-- [anything else — maze generation? clear/reset? add it here]
 
 ## Stack
 
