@@ -1,7 +1,7 @@
 // ---- Constants & types ----
 export const CELL_SIZE = 45;
-export const COLS = 5;
-export const ROWS = 3;
+export const COLS = 30;
+export const ROWS = 20;
 
 
 export const enum CellState { Empty, Wall, Start, End, Visited, Path, Frontier}

@@ -9,7 +9,7 @@ import * as Algorithms from "./algorithms";
 
 let currentTool: CellState = CellState.Wall;
 let weightMode = false;
-let simulationSpeed: number = 30;
+let simulationSpeed: number;
 let isDrawing = false;
 
 function onGridClick(event: MouseEvent) {
@@ -83,9 +83,6 @@ function reset() {
   render();
 }
 
-function updateSpeed(speed: number) {
-  simulationSpeed = speed;
-}
 
 function mouseDown() {
   isDrawing = true;
@@ -161,14 +158,18 @@ function bindControls() {
 
   const speedSlider = (document.getElementById("speedSlider") as HTMLInputElement);
   speedSlider.min = "10";
-  speedSlider.max = "150";
-  speedSlider.value = "70";
+  speedSlider.max = "200";
+  speedSlider.value = "100";
+  simulationSpeed = Number(speedSlider.value);
 
   speedSlider.addEventListener("input", () => {
-    updateSpeed(110 - Number(speedSlider.value));
+    simulationSpeed = 200.0001 - Number(speedSlider.value);
   });
 
-  
+
+
+
+
   canvas.width = CELL_SIZE * COLS;
   canvas.height = CELL_SIZE * ROWS;
 
