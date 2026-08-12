@@ -31,7 +31,31 @@ once the target is reached.
 
 ## Stack
 
-TypeScript, HTML Canvas, deployed on Vercel.
+TypeScript, HTML Canvas, Vite, deployed on Vercel.
+
+## Notes on the implementation
+
+The grid is a 2D array of mutable cell objects, each holding its coordinates,
+a state enum, a movement weight and a tentative distance. Algorithms mutate
+cell state directly, and the renderer draws whatever it finds — so there's no
+separate visualisation model to keep in sync with the search.
+
+Animation is driven by generators rather than a precomputed replay. Each
+algorithm is a `function*` that yields at the points where the grid has
+visibly changed — a cell being visited, entering the frontier, or being
+marked as part of the final path. The controller drives it with `gen.next()`,
+renders, and schedules the next step with `setTimeout` at the current speed
+setting. This means the algorithms are written as ordinary straight-line code
+with no callbacks or state machines, and pausing between steps is just a
+suspended generator rather than a recorded list of events being played back.
+
+BFS and DFS share a structure and differ only in how they take from the
+container — `shift()` for a queue, `pop()` for a stack — with `Visited` state
+doubling as the closed set. Dijkstra keeps a separate distance map and
+selects the minimum by linear scan over the frontier array, which is O(V) per
+extraction and so O(V²) overall; a binary heap would bring that to O(E log V),
+and is the obvious next change. Movement is four-directional, and edge cost
+is the weight of the cell being entered.
 
 ## Running locally
 
